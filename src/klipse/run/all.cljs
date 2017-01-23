@@ -9,6 +9,7 @@
             klipse.lang.sql
             klipse.lang.python
             klipse.lang.cpp
+            klipse.lang.plantuml
             klipse.lang.server-eval
             klipse.lang.php
             klipse.run.app.app))

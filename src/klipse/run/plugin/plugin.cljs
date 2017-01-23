@@ -4,6 +4,7 @@
             klipse.lang.js-compile
             klipse.lang.ruby
             klipse.lang.cpp
+            klipse.lang.plantuml
             klipse.lang.jsx
             klipse.lang.brainfuck
             klipse.lang.sql

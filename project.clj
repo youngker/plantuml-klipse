@@ -7,14 +7,15 @@
                  [im.chit/purnam "0.5.2"]
                  [cljsjs/markdown "0.6.0-beta1-0"]
                  [cljs-http "0.1.42"]
+                 [cljs-ajax "0.5.8"]
                  [viebel/gadjett "0.3.2"]
                  [org.omcljs/om "1.0.0-alpha47"]
                  [com.cemerick/url "0.1.1"]
                  [rewrite-cljs "0.4.3"]
                  [cljsjs/codemirror "5.19.0-0"]
                  ;; repos for cache-cljs
-                 ;[reagent "0.6.1-SNAPSHOT"]
-                 ;[org.clojure/math.combinatorics "0.2.0"]
+                                        ;[reagent "0.6.1-SNAPSHOT"]
+                                        ;[org.clojure/math.combinatorics "0.2.0"]
                  
                  [devcards "0.2.2"]
                  [devcards-om-next "0.3.0"]]
@@ -29,54 +30,54 @@
   :source-paths ["src" "scripts"]
   :hiera
   {:path "deps-graph.png"
-    :vertical true
-    :show-external false
-    :cluster-depth 2
-    :trim-ns-prefix true
-    :ignore-ns #{cache.build klipse.cards}}
+   :vertical true
+   :show-external false
+   :cluster-depth 2
+   :trim-ns-prefix true
+   :ignore-ns #{cache.build klipse.cards}}
   :cljsbuild {
               :builds {
                        :test {
-                                :source-paths ["test" "src/klipse/cards/test"]
+                              :source-paths ["test" "src/klipse/cards/test"]
+                              :compiler {
+                                         :output-to "resources/private/test/klipse.testable.js"
+                                         :output-dir "resources/private/test"
+                                         :verbose false
+                                         :optimizations :simple}}
+                       :app {
+                             :source-paths ["src/klipse/run/app" "resources/public/lib"]
+                             :compiler {
+                                        :preamble ["mirror_extensions.js"]
+                                        :output-to "resources/public/dev/js/klipse.js"
+                                        :output-dir "resources/public/dev/js"
+                                        :pretty-print true
+                                        :optimize-constants true
+                                        :static-fns true
+                                        ;:elide-asserts true
+                                        :optimizations :simple
+                                        :verbose false}}
+                       :plugin {
+                                :source-paths ["src/klipse/run/plugin" "resources/public/lib"]
                                 :compiler {
-                                           :output-to "resources/private/test/klipse.testable.js"
-                                           :output-dir "resources/private/test"
-                                           :verbose false
-                                           :optimizations :simple}}
-                      :app {
-                               :source-paths ["src/klipse/run/app" "resources/public/lib"]
-                               :compiler {
-                                    :preamble ["mirror_extensions.js"]
-                                          :output-to "resources/public/dev/js/klipse.js"
-                                          :output-dir "resources/public/dev/js"
-                                          :pretty-print true
-                                          :optimize-constants true
-                                          :static-fns true
-                                          ;:elide-asserts true
-                                          :optimizations :simple
-                                          :verbose false}}
-                      :plugin {
-                               :source-paths ["src/klipse/run/plugin" "resources/public/lib"]
-                               :compiler {
-                                    :preamble ["mirror_extensions.js"]
-                                          :output-to "resources/public/plugin/js/klipse_plugin.js"
-                                          :output-dir "resources/public/plugin/js"
-                                          :pretty-print false
-                                          :optimize-constants true
-                                          :static-fns true
-                                          ;:elide-asserts true
-                                          :optimizations :simple
-                                          :verbose false}}
-                      :plugin-prod {
-                               :source-paths ["src/klipse/run/plugin_prod" "resources/public/lib"]
-                               :compiler {
-                                          :preamble ["mirror_extensions.js"]
-                                          :output-to "resources/public/plugin_prod/js/klipse_plugin.min.js"
-                                          :output-dir "resources/public/plugin_prod/js"
-                                          :pretty-print true
-                                          :elide-asserts false
-                                          :optimizations :advanced
-                                          :verbose true}}
+                                           :preamble ["mirror_extensions.js"]
+                                           :output-to "resources/public/plugin/js/klipse_plugin.js"
+                                           :output-dir "resources/public/plugin/js"
+                                           :pretty-print false
+                                           :optimize-constants true
+                                           :static-fns true
+                                        ;:elide-asserts true
+                                           :optimizations :simple
+                                           :verbose false}}
+                       :plugin-prod {
+                                     :source-paths ["src/klipse/run/plugin_prod" "resources/public/lib"]
+                                     :compiler {
+                                                :preamble ["mirror_extensions.js"]
+                                                :output-to "resources/public/plugin_prod/js/klipse_plugin.min.js"
+                                                :output-dir "resources/public/plugin_prod/js"
+                                                :pretty-print true
+                                                :elide-asserts false
+                                                :optimizations :advanced
+                                                :verbose true}}
                        :figwheel {
                                   :figwheel true
                                   :source-paths ["src"]
@@ -85,7 +86,7 @@
                                              :asset-path "fig/js"
                                              :output-to "resources/public/fig/js/klipse.fig.js"
                                              :output-dir "resources/public/fig/js"
-                                             ;:elide-asserts true
+                                        ;:elide-asserts true
                                              :verbose false}}
                        :devcards {
                                   :figwheel { :devcards true }
@@ -94,6 +95,6 @@
                                              :asset-path "cards/js"
                                              :output-to "resources/public/cards/js/klipse.js"
                                              :output-dir "resources/public/cards/js"
-                                             ;:elide-asserts true
+                                        ;:elide-asserts true
                                              :verbose false}}
                        }})
